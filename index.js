@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-const EMAIL = "your_chitkara_email";
+const EMAIL = "gripsi0169.be23@chitkara.edu.in";
 
-/* ----------- HEALTH ----------- */
+
 app.get("/health", (req, res) => {
     res.status(200).json({
         is_success: true,
@@ -12,7 +12,7 @@ app.get("/health", (req, res) => {
     });
 });
 
-/* ----------- HELPERS ----------- */
+
 function fibonacci(n){
     let arr=[0,1];
     for(let i=2;i<n;i++){
@@ -37,7 +37,7 @@ function lcm(a,b){
     return (a*b)/gcd(a,b);
 }
 
-/* ----------- BFHL ----------- */
+
 app.post("/bfhl", async (req,res)=>{
     try{
 
