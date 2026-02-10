@@ -1,15 +1,18 @@
 const express = require("express");
 const app = express();
-
 app.use(express.json());
 
-const EMAIL = "gripsi0169.be23@chitkara.edu.in";
+const EMAIL = "your_chitkara_email";
+
+/* ----------- HEALTH ----------- */
 app.get("/health", (req, res) => {
     res.status(200).json({
         is_success: true,
         official_email: EMAIL
     });
 });
+
+/* ----------- HELPERS ----------- */
 function fibonacci(n){
     let arr=[0,1];
     for(let i=2;i<n;i++){
@@ -33,12 +36,25 @@ function gcd(a,b){
 function lcm(a,b){
     return (a*b)/gcd(a,b);
 }
+
+/* ----------- BFHL ----------- */
 app.post("/bfhl", async (req,res)=>{
     try{
 
         const body=req.body;
+        const keys = Object.keys(body);
 
-        if(body.fibonacci){
+        if(keys.length !== 1){
+            return res.status(400).json({
+                is_success:false,
+                official_email:EMAIL
+            });
+        }
+
+        if(body.fibonacci !== undefined){
+            if(typeof body.fibonacci !== "number"){
+                return res.status(400).json({is_success:false, official_email:EMAIL});
+            }
             return res.status(200).json({
                 is_success:true,
                 official_email:EMAIL,
@@ -92,6 +108,5 @@ app.post("/bfhl", async (req,res)=>{
         });
     }
 });
-app.listen(3000, ()=>{
-    console.log("Server running");
-});
+
+app.listen(3000, ()=> console.log("Server running"));
